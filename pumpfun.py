@@ -1,7 +1,4 @@
-import requests
 from loguru import logger
-import uuid
-import time
 from utils import *
 import aiohttp
 import asyncio

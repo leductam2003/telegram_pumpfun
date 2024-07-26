@@ -1,0 +1,1 @@
+pip3 install nest_asyncio python-telegram-bot requests loguru aiohttp
