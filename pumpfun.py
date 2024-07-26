@@ -51,7 +51,7 @@ class PUMPFUN:
             if data['mint'] not in self.processed_mints:
                 self.processed_mints.add(data['mint'])
                 usd_marketcap = solPrice['solPrice'] * data['market_cap']
-                data['usd_marketcap'] = "${:,.3f}".format(usd_marketcap)
+                data['usd_marketcap'] = "${:,.0f}".format(usd_marketcap)
                 await telegram_helper.send_to_telegram(data)
         except Exception as err:
             logger.error(err)
