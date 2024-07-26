@@ -36,6 +36,7 @@ async def send_to_telegram(data):
 
 *Mint*: `{escape_markdown(data['mint'], version=2)}`
 
+*Market Cap:* {escape_markdown(data['usd_marketcap'], version=2)}
 *Name*: {escape_markdown(data["name"], version=2)} \({escape_markdown(data['symbol'], version=2)}\)
 *Description*: {escape_markdown(data["description"][:500], version=2)}
 

@@ -1,1 +1,3 @@
 sudo install python3-nest_asyncio python-telegram-bot requests loguru aiohttp
+
+python3 pumpfun.py

@@ -27,13 +27,34 @@ class PUMPFUN:
             # sleep added for rate limiting
             time.sleep(1)
 
+    def fetch_sol_price(self):
+        got_response = False
+        while not got_response:
+            try:
+                response = requests.get('https://frontend-api.pump.fun/sol-price', headers=self.headers)
+                if response.status_code == 200:
+                    return response.json()
+                else:
+                    logger.error(response.reason)
+            except Exception as err:
+                logger.error(err)
+            time.sleep(1)
+
     async def new_launch(self):
-        data = self.fetch_new_token()
-        if not data:
-            return
-        if data['mint'] not in self.processed_mints:
-            self.processed_mints.add(data['mint'])
-            await telegram_helper.send_to_telegram(data)
+        try:
+            data = self.fetch_new_token()
+            if not data:
+                return
+            solPrice = self.fetch_sol_price()
+            if not solPrice:
+                return
+            if data['mint'] not in self.processed_mints:
+                self.processed_mints.add(data['mint'])
+                usd_marketcap = solPrice['solPrice'] * data['market_cap']
+                data['usd_marketcap'] = "${:,.3f}".format(usd_marketcap)
+                await telegram_helper.send_to_telegram(data)
+        except Exception as err:
+            logger.error(err)
 
 async def main():
     pumpfun = PUMPFUN()
