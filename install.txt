@@ -1,7 +1,10 @@
 sudo install python3-nest_asyncio python-telegram-bot requests loguru aiohttp
 
 python3 pumpfun.py
-
+rm -rf telegram_pumpfun
 git clone https://github.com/leductam2003/telegram_pumpfun.git
 
 cd telegram_pumpfun
+
+https://t.me/dogeebot_bot?start=rs-pumpearly-Eou9X2fnFgFyk7jSPW1XsVzxX5GMqSeBVuMdEvgwpump
+https://pump.fun/

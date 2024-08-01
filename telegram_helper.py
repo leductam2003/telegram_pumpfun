@@ -48,10 +48,16 @@ async def send_to_telegram(data):
     new_image = data['image_uri'].replace('https://cf-ipfs.com/', 'https://pump.mypinata.cloud/')
 
     bot_button = [
-        InlineKeyboardButton("Plonk", url='https://t.me/PlonkBot_bot?start=a_' + data['mint']),
         InlineKeyboardButton("Bullx", url='https://bullx.io/terminal?chainId=1399811149&address=' + data['mint']),
-        InlineKeyboardButton("Pepe", url='https://t.me/pepeboost_sol_bot?start=ref_02ppbg_ca_' + data['mint']),
         InlineKeyboardButton("Photon", url='https://photon-sol.tinyastro.io/en/lp/' + data['mint'])
+    ]
+    bot_button2 = [
+        InlineKeyboardButton("Plonk", url='https://t.me/PlonkBot_bot?start=a_' + data['mint']),
+        InlineKeyboardButton("Dogee", url='https://t.me/dogeebot_bot?start=rs-pumpearly-' + data['mint']),
+        InlineKeyboardButton("Pepe", url='https://t.me/pepeboost_sol_bot?start=ref_02ppbg_ca_' + data['mint']),
+    ]
+    bot_button3 = [
+        InlineKeyboardButton("Pumpfun", url='https://pump.fun/' + data['mint']),
     ]
     keyboard = []
     if data.get('twitter') and is_url(data.get('twitter')):
@@ -63,7 +69,7 @@ async def send_to_telegram(data):
     if data.get('website') and (is_url(data.get('website'))):
         keyboard.append(InlineKeyboardButton("Website", url=data['website']))
 
-    reply_markup = InlineKeyboardMarkup([bot_button,keyboard])
+    reply_markup = InlineKeyboardMarkup([bot_button3, bot_button2, bot_button, keyboard])
     bot = Bot(token=TOKEN)
     logger.info(f"{data['name']} - {data['mint']}")
     return await bot.send_photo(chat_id=CHANNEL_ID, photo=new_image, caption=message, parse_mode=ParseMode.MARKDOWN_V2, reply_markup=reply_markup)
